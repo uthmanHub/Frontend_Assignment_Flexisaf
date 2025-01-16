@@ -2,6 +2,17 @@ import React from "react";
 import news from "./../assets/Data";
 
 const Main = () => {
+  // using map function to display an array in console
+  news.map((item) => {
+    console.log(item)
+  })
+
+  // using foreach function to display an array in console
+
+  news.forEach((item) => {
+    console.log(item.title, "author by ==", item.author)
+  })
+
   return (
     <main className="px-10">
     <h1 className="mt-10 text-primary">Latest News:</h1>
@@ -18,7 +29,7 @@ const Main = () => {
                 <span className="w-fit sm:text-xs">Author: {item.author}</span>
                 <div className=" items-center w-fit font-medium text-link">
                     <a href="#" className="">Read more</a>
-                    <i class="fa-solid fa-arrow-right-long"></i>
+                    <i className="fa-solid fa-arrow-right-long"></i>
                 </div>
               </div>
             </div>
