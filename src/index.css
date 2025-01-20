@@ -11,10 +11,21 @@
 
 body {
   background-color: #26343e;
+  /* background-color: #32282b; */
+  
   
 }
+
 
 .hide>summary::marker {
   content: " ";
 }
 
+a{
+  transition: border .1s ease-out;
+  border-bottom: 2px dotted;
+}
+a:hover {
+  padding-bottom: 1px;
+  border-bottom: 2px double;
+}
