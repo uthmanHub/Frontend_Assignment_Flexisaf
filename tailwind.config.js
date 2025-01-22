@@ -10,7 +10,7 @@ export default {
         bg: '#26343e',
         primary: '#3ebbd6',
         card: '#fdcb5b',
-        link: '#8a638e'
+        link: '#065868'
       }
     },
   },
