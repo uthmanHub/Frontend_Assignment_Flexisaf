@@ -1,27 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink,} from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav className='flex text-[#3ebbd6] sticky top-0 w-full  bg-bg text-xl font-medium justify-between items-center p-5 border-b-2 px-3 md:px-6 lg:px-10'>
-      <Link to='/'>
+    <nav className='flex text-primary sticky top-0 w-full  bg-bg text-xl font-medium justify-between items-center p-5 border-b-2 px-3 md:px-6 lg:px-10'>
+      <NavLink to='/'>
         <span className='font-semibold text-2xl'>
-          Uthman<span className='text-[#fdcb5b]'>Code.</span>
+          Uthman<span className='text-card'>Code.</span>
         </span>
-      </Link>
+      </NavLink>
 
       <ul className='gap-5 hidden lg:flex '>
-        <li>
-          <Link to='/'>Home</Link>
+        <li >
+          <NavLink className="px-3" to='/'>Home</NavLink>
         </li>
         <li>
-          <Link to='/about'>About</Link>
+          <NavLink to='/about'>About</NavLink>
         </li>
         <li>
-          <Link to='/blog'>Blog</Link>
+          <NavLink to='/blog'>Blog</NavLink>
         </li>
         <li>
-          <Link to='/contact'>Contact</Link>
+          <NavLink to='/contact'>Contact</NavLink>
+        </li>
+        <li>
+          <NavLink to='/shop'>Shop</NavLink>
         </li>
       </ul>
 
@@ -31,16 +34,19 @@ const Header = () => {
         </summary>
         <ul className=' absolute w-fit right-0 bg-bg p-10 '>
           <li>
-            <Link to='/'>Home</Link>
+            <NavLink to='/'>Home</NavLink>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <NavLink to='/about'>About</NavLink>
           </li>
           <li>
-            <Link to='/blog'>Blog</Link>
+            <NavLink to='/blog'>Blog</NavLink>
           </li>
           <li>
-            <Link to='/contact'>Contact</Link>
+            <NavLink to='/contact'>Contact</NavLink>
+          </li>
+          <li>
+            <NavLink to='/shop'>Shop</NavLink>
           </li>
         </ul>
       </details>
