@@ -10,5 +10,30 @@
 }
 
 body {
+  /* background-color: #26343e; */
+}
+
+::-webkit-scrollbar{
+  width: 10px;
   background-color: #26343e;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 20px;
+  background-color: #2b8599;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #fff;
+  background-color: #fdcb5b;
+}
+
+
+
+li > .active {
+  padding: 5px 15px;
+  color: #26343e;
+  font-weight: medium;
+  background-color: #fdcb5b;
+  border-radius: 5px;
 }

@@ -180,3 +180,70 @@ I delete the branch once a feature is complete to keep the repository clean.
     git push origin --delete project-layout 
     ```
 
+
+
+
+# Week 3 Learning Summary
+
+In this week, I explored fundamental React concepts and applied them in building a website with **Home, About, and Blog** pages using **React Router** for navigation. Below are the key topics covered:
+
+### 📌 **Virtual DOM**
+- React uses a Virtual DOM to optimize UI rendering by updating only the necessary parts of the real DOM.
+
+### 📌 **State & Props**
+- **State**: Manages component-specific data that triggers re-renders when updated.
+- **Props**: Used to pass data from parent to child components.
+
+### 📌 **JSX (JavaScript XML)**
+- A syntax extension that allows writing HTML-like code inside JavaScript.
+- Example:
+  ```jsx
+  const greeting = <h1>Hello, World!</h1>;
+  ```
+
+### 📌 **Fragments**
+- Used to group multiple elements without adding extra DOM nodes.
+- Example:
+  ```jsx
+  <React.Fragment>
+    <h1>Title</h1>
+    <p>Description</p>
+  </React.Fragment>
+  ```
+
+### 📌 **Event Handling in React**
+- Events are handled using camelCase syntax and function references.
+- Example:
+  ```jsx
+  function handleClick() {
+    alert('Button clicked!');
+  }
+  
+  <button onClick={handleClick}>Click Me</button>
+  ```
+
+### 📌 **React Router for Navigation**
+- Implemented `react-router-dom` for navigation between pages.
+- Example:
+  ```jsx
+  import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
+  function App() {
+    return (
+      <Router>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/blog">Blog</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
+      </Router>
+    );
+  }
+  ```
+
+This week’s learning provided a solid foundation for structuring React applications with dynamic components and navigation. 🚀
