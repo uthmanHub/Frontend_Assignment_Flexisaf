@@ -247,3 +247,117 @@ In this week, I explored fundamental React concepts and applied them in building
   ```
 
 This week’s learning provided a solid foundation for structuring React applications with dynamic components and navigation. 🚀
+
+
+
+# Week 4 Learning Summary
+
+This week, I focused on making API calls in React using **fetch API** and **Axios** to perform CRUD operations (**GET, POST, PUT, and DELETE**). I implemented these in my project using the **DummyJSON Store API** (`https://dummyjson.com/products`) to manage product data.
+
+---
+
+### 📌 **Making API Calls in React**
+API calls were integrated inside:
+- `useEffect()` for fetching data on component mount.
+- Event handlers for actions like adding, updating, and deleting products.
+
+---
+
+### 📌 **GET All Request (Fetching Products)**
+Retrieves product data from the API.
+
+```jsx
+useEffect(() => {
+  fetch("https://dummyjson.com/products")
+    .then((res) => res.json())
+    .then((data) => setProducts(data.products))
+    .catch((error) => console.error("Error:", error));
+}, []);
+```
+
+Here’s how you can fetch a **single product** using the DummyJSON Store API:
+
+### 📌 **GET Request (Fetching a Single Product by ID)**
+Retrieves details of a specific product.
+
+#### **Using `fetch` API:**
+```jsx
+const {id} = useParams();
+
+fetch('https://dummyjson.com/products/' + id)
+  .then((res) => res.json())
+  .then((data) => console.log("Single Product:", data))
+  .catch((error) => console.error("Error:", error));
+```
+
+#### **Using Axios:**
+```jsx
+import axios from "axios";
+
+const {id} = useParams();
+
+axios.get('https://dummyjson.com/products/' + id)
+  .then((response) => console.log("Single Product:", response.data))
+  .catch((error) => console.error("Error:", error));
+```
+
+This will return details of the product with the specified ID. Would you like to display this data in your React component?
+
+
+---
+
+
+### 📌 **POST Request (Adding a Product)**
+Sends a new product to the API.
+
+```jsx
+const newProduct = { title: "New Phone", price: 299 };
+
+fetch("https://dummyjson.com/products/add", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(newProduct),
+})
+  .then((res) => res.json())
+  .then((data) => console.log("Product added:", data));
+```
+
+---
+
+### 📌 **PUT Request (Updating a Product)**
+Updates an existing product.
+
+```jsx
+const updatedProduct = { title: "Updated Phone", price: 349 };
+
+fetch("https://dummyjson.com/products/1", {
+  method: "PUT",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(updatedProduct),
+})
+  .then((res) => res.json())
+  .then((data) => console.log("Product updated:", data));
+```
+
+---
+
+### 📌 **DELETE Request (Removing a Product)**
+Deletes a product from the store.
+
+```jsx
+fetch("https://dummyjson.com/products/1", {
+  method: "DELETE",
+})
+  .then(() => console.log("Product deleted"));
+```
+
+---
+
+### 📌 **Key Takeaways**
+✅ Used **DummyJSON Store API** for real-world API interaction.  
+✅ Implemented **fetch API** for making network requests.  
+✅ Implemented loading effect while waiting for network requests.  
+✅ Handled API responses dynamically in a React application.  
+✅ Practiced updating UI based on API responses.
+
+This week’s learning improved my ability to integrate backend APIs with a React frontend. 🚀
