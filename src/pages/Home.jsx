@@ -24,7 +24,8 @@ let sampleNews = [
       "London CNN —\nBritain’s government has backed a tortured effort to build a third runway at Heathrow, Europe’s busiest airport, throwing its weight behind a decades-old proposal that has been beset by political, legal and environmental challenges.\nThe ... [3348 chars]",
     description:
       "Britain’s government has backed a tortured effort to build a third runway at Heathrow, Europe’s busiest airport, throwing its weight behind a decades-old proposal that has been beset by political, legal and environmental challenges.",
-    image: "https://images.nintendolife.com/a36858ec3ab7d/1280x720.jpg",
+    image:
+      "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25848666/KV_DINO_CRISIS.png?quality=90&strip=all&crop=5.83125%2C0%2C88.3375%2C100&w=1200",
     publishedAt: "2025-01-29T12:18:00Z",
     source: {
       name: "CNN",
@@ -97,7 +98,7 @@ const Home = () => {
           setNews(articles);
         });
     }
-    getNews()
+    // getNews()
 
     return () => {};
   }, []);
@@ -106,12 +107,19 @@ const Home = () => {
       {/************** 
         Header Section
       **************/}
-      <header className='bg-[url(./images/heroPic.jpg)]  w-full h-[90vh] bg-no-repeat bg-cover '>
+      <header className='backgroundImg  w-full h-[90vh] bg-no-repeat bg-cover '>
         <div className='w-full h-full  bg-[#1f1c1caa] text-white flex items-center justify-center '>
-          <div className="text-center space-y-3">
-            <h1 className="capitalize font-bold md:text-lg lg:text-4xl">we love to build web & mobile apps</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, atque.</p>
-            <button className='button text-bg font-medium capitalize '>lean more</button>
+          <div className='text-center space-y-3'>
+            <h1 className='capitalize font-bold md:text-lg lg:text-4xl'>
+              we love to build web & mobile apps
+            </h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione,
+              atque.
+            </p>
+            <button className='button text-bg font-medium capitalize '>
+              lean more
+            </button>
           </div>
         </div>
       </header>

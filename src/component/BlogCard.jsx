@@ -26,7 +26,7 @@ const BlogCard = ({ news }) => {
   }, []);
 
   return (
-    <div className='space-y-4 border-2 shadow-xl rounded-md bg-gray-300'>
+    <div className='grid space-y-4 border-2 shadow-xl rounded-md bg-gray-300'>
       <div ref={imgRef} className=''>
         {/* {!isLoaded && (
           <div className="w-full h-72 bg-gray-200 animate-pulse rounded-lg"></div>

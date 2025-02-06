@@ -23,7 +23,8 @@ let sampleNews = [
       "London CNN —\nBritain’s government has backed a tortured effort to build a third runway at Heathrow, Europe’s busiest airport, throwing its weight behind a decades-old proposal that has been beset by political, legal and environmental challenges.\nThe ... [3348 chars]",
     description:
       "Britain’s government has backed a tortured effort to build a third runway at Heathrow, Europe’s busiest airport, throwing its weight behind a decades-old proposal that has been beset by political, legal and environmental challenges.",
-    image: "https://images.nintendolife.com/a36858ec3ab7d/1280x720.jpg",
+    image:
+      "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25848666/KV_DINO_CRISIS.png?quality=90&strip=all&crop=5.83125%2C0%2C88.3375%2C100&w=1200",
     publishedAt: "2025-01-29T12:18:00Z",
     source: {
       name: "CNN",
@@ -97,30 +98,39 @@ const Blog = () => {
   const newsUrl = import.meta.env.VITE_NEWS_URL;
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     async function getNews() {
+      let url =
+        newsUrl + category + "&lang=en&country=us&max=10&apikey=" + apikey;
 
-      let url = newsUrl + category + "&lang=en&country=us&max=10&apikey=" + apikey;
-
-      fetch(url)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
+      fetch(url, { signal })
+        .then(response => response.json())
+        .then(data => {
           let articles = data.articles;
           setNews(articles);
+        })
+        .catch(error => {
+          if (error.name !== "AbortError") {
+            console.error("Fetch error:", error);
+          }
         });
     }
-    getNews()
 
-    return () => {};
-  }, []);
+    getNews();
+
+    return () => {
+      controller.abort();
+    };
+  }, [category]);
 
   return (
     <main className='px-3 md:px-6 lg:px-10 '>
       {/* set a categoryList */}
-      <div className='flex flex-wrap gap-1 flex-1 md:gap-2 mt-2 w-full '>
+      <div className='flex items-center flex-wrap gap-1 flex-1 md:gap-2 mt-2 w-full '>
         Category:
-        <select className="border" name='' id=''>
+        {/* <select className='border' name='' id=''>
           {categoryList.map((item, index) => {
             return (
               <option
@@ -133,8 +143,8 @@ const Blog = () => {
               </option>
             );
           })}
-        </select>
-        {/* {categoryList.map((item, index) => {
+        </select> */}
+        {categoryList.map((item, index) => {
           return (
             <span
               key={index}
@@ -144,7 +154,7 @@ const Blog = () => {
               {item} <span className='hidden md:inline'>News</span>
             </span>
           );
-        })} */}
+        })}
       </div>
       <h2 className='text-white'>{category}</h2>
 
