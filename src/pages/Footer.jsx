@@ -27,16 +27,16 @@ const Footer = () => {
           <h3>Follow us</h3>
           <ul className='flex gap-3 md:gap-5 justify-center md:justify-normal'>
             <li>
-              <i className='fa fa-facebook'></i>
+              <i className='fa-brands fa-facebook hover:text-card hover:scale-150'></i>
             </li>
             <li>
-              <i className='fa fa-twitter'></i>
+              <i className='fa-brands fa-twitter hover:text-card hover:scale-150'></i>
             </li>
             <li>
-              <i className='fa fa-github'></i>
+              <i className='fa-brands fa-github hover:text-card hover:scale-150'></i>
             </li>
             <li>
-              <i className='fa fa-linkedin'></i>
+              <i className='fa-brands fa-linkedin hover:text-card hover:scale-150'></i>
             </li>
           </ul>
         </div>
