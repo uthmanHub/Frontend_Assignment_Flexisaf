@@ -98,7 +98,7 @@ const Home = () => {
           setNews(articles);
         });
     }
-    // getNews()
+    getNews()
 
     return () => {};
   }, []);

@@ -361,3 +361,171 @@ fetch("https://dummyjson.com/products/1", {
 ✅ Practiced updating UI based on API responses.
 
 This week’s learning improved my ability to integrate backend APIs with a React frontend. 🚀
+
+
+
+# **Week 5 Learning Summary: React Hooks**  
+
+This week, I explored essential React Hooks for managing state, handling side effects, optimizing performance, and referencing DOM elements. Additionally, I used the useRef hook to collect user information/message in a single object and also created a custom hook called useFetch to simplify API requests.  
+
+## **📌 Hooks Covered:**  
+- `useState` → Manages component state.  
+- `useEffect` → Handles side effects (e.g., fetching data).  
+- `useRef` → References DOM elements and stores persistent values.  
+- `useMemo` → Optimizes expensive computations.  
+- `useCallback` → Memoizes functions to prevent unnecessary re-renders.  
+
+---
+
+## **🔹 useState (Managing State in Functional Components)**  
+`useState` allows components to **store and update state** without needing class components.  
+
+```jsx
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+- **Why use `useState`?**  
+  - Keeps track of dynamic values.  
+  - Triggers a component re-render when the state updates.  
+
+---
+
+## **🔹 useEffect (Handling Side Effects & Fetching Data)**  
+`useEffect` runs **after rendering** and is used for **fetching data, subscriptions, or modifying the DOM**.  
+
+```jsx
+import { useState, useEffect } from "react";
+
+function FetchData() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data.products))
+      .catch((error) => console.error("Error:", error));
+  }, []); // Runs only once when the component mounts.
+
+  return (
+    <ul>
+      {products.map((product) => (
+        <li key={product.id}>{product.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+- **Why use `useEffect`?**  
+  - Handles **side effects** like API calls and event listeners.  
+  - Runs on **mount, update, or unmount**, depending on dependencies.  
+
+---
+
+## **🔹 useRef (Referencing DOM Elements & Persistent Values)**  
+`useRef` is used to **access DOM elements directly** and to **store values without causing re-renders**.  
+
+```jsx
+import { useRef } from "react";
+
+function InputFocus() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" placeholder="Type something..." />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+}
+```
+- **Why use `useRef`?**  
+  - Stores **mutable values** that **persist** between renders.  
+  - Used to directly interact with the **DOM** (e.g., focus an input field).  
+
+---
+
+## **🔹 useMemo (Optimizing Expensive Computations)**  
+`useMemo` **caches the result** of an expensive calculation to prevent unnecessary recomputation.  
+
+```jsx
+import { useState, useMemo } from "react";
+
+function ExpensiveCalculation({ num }) {
+  const square = useMemo(() => {
+    console.log("Calculating square...");
+    return num * num;
+  }, [num]); // Only recalculates when `num` changes.
+
+  return <p>Square: {square}</p>;
+}
+
+function App() {
+  const [num, setNum] = useState(2);
+
+  return (
+    <div>
+      <ExpensiveCalculation num={num} />
+      <button onClick={() => setNum(num + 1)}>Increase Number</button>
+    </div>
+  );
+}
+```
+- **Why use `useMemo`?**  
+  - Improves **performance** by avoiding expensive recalculations.  
+  - Useful for optimizing functions that **depend on changing state**.  
+
+---
+
+## **🔹 useCallback (Optimizing Function Performance)**  
+`useCallback` **memoizes functions** so they are not recreated unnecessarily during re-renders.  
+
+```jsx
+import { useState, useCallback } from "react";
+
+function Button({ handleClick }) {
+  return <button onClick={handleClick}>Click Me</button>;
+}
+
+function ParentComponent() {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => {
+    setCount((prev) => prev + 1);
+  }, []); // Function is only created once.
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <Button handleClick={increment} />
+    </div>
+  );
+}
+```
+- **Why use `useCallback`?**  
+  - Prevents **function recreation** on every render.  
+  - Optimizes **child component re-renders** in performance-critical apps.  
+
+---
+
+## **📌 Key Takeaways**  
+✅ `useState` → Handles state changes.  
+✅ `useEffect` → Runs side effects like fetching data.  
+✅ `useRef` → References DOM elements without causing re-renders.  
+✅ `useMemo` → Optimizes performance by memoizing expensive computations.  
+✅ `useCallback` → Prevents unnecessary function recreation.  
+
+These hooks **improve React applications by enhancing performance, managing state, and handling side effects efficiently**. 🚀  
