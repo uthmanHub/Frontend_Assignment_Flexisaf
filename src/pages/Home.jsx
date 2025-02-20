@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BlogCard from "../component/BlogCard";
+import bgImg from '/images/heroPic.jpg'
 
 let sampleNews = [
   {
@@ -87,27 +88,35 @@ const Home = () => {
 
   useEffect(() => {
     async function getNews() {
+      const controller = new AbortController();
+      const { signal } = controller;
       let url = newsUrl + "general&lang=en&country=us&max=10&apikey=" + apikey;
-
-      fetch(url)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          let articles = data.articles;
-          setNews(articles);
-        });
+    
+      try {
+        let response = await fetch(url, { signal });
+        let data = await response.json();
+        let articles = data.articles;
+        setNews(articles);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setNews(null);
+        }
+      }
+    
+      return () => {
+        controller.abort();
+      };
     }
+
     getNews()
 
-    return () => {};
   }, []);
   return (
     <>
       {/************** 
         Header Section
       **************/}
-      <header className='backgroundImg  w-full h-[90vh] bg-no-repeat bg-cover '>
+      <header style={{'backgroundImage': `url(${bgImg})`}} className='w-full h-[90vh] bg-no-repeat bg-cover'>
         <div className='w-full h-full  bg-[#1f1c1caa] text-white flex items-center justify-center '>
           <div className='text-center space-y-3'>
             <h1 className='capitalize font-bold md:text-lg lg:text-4xl'>

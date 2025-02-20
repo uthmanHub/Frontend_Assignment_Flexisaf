@@ -98,31 +98,28 @@ const Blog = () => {
   const newsUrl = import.meta.env.VITE_NEWS_URL;
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
     async function getNews() {
-      let url =
-        newsUrl + category + "&lang=en&country=us&max=10&apikey=" + apikey;
+      const controller = new AbortController();
+      const { signal } = controller;
+      let url = newsUrl + category + "&lang=en&country=us&max=10&apikey=" + apikey;
 
-      fetch(url, { signal })
-        .then(response => response.json())
-        .then(data => {
-          let articles = data.articles;
-          setNews(articles);
-        })
-        .catch(error => {
-          if (error.name !== "AbortError") {
-            console.error("Fetch error:", error);
-          }
-        });
+      try {
+        let response = await fetch(url, { signal });
+        let data = await response.json();
+        setNews(data.articles);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error("Fetch error:", error);
+        }
+      }
+    
+      return () => {
+        controller.abort();
+      };
     }
 
     getNews();
 
-    return () => {
-      controller.abort();
-    };
   }, [category]);
 
   return (
@@ -166,17 +163,9 @@ const Blog = () => {
           })}
         </div>
       ) : (
-        <>
-          <p className='flex justify-center items-center h-full font-bold text-2xl text-red-600'>
-            Note: The content below is a static content and it's showing due to
-            not being able to get the online news content.
-          </p>
-          <div className='grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5'>
-            {sampleNews.map((item, index) => {
-              return <BlogCard key={index} news={item} />;
-            })}
-          </div>
-        </>
+        <div className='flex justify-center items-center h-screen '>
+          <div className='loader'></div>
+        </div>
       )}
     </main>
   );
