@@ -50,23 +50,23 @@ const Contact = () => {
           <div className='flex justify-between flex-col lg:flex-row w-full'>
             <div className='space grid gap-2'>
               <label htmlFor="f_name">First Name</label>
-              <input type="text" id="f_name" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
+              <input required type="text" id="f_name" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
             </div>
 
             <div className='space grid gap-2'>
               <label htmlFor="l_name">Last Name</label>
-              <input type="text" id="l_name" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
+              <input required type="text" id="l_name" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
             </div>
           </div>
 
           <div className='space grid gap-2'>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
+            <input required type="email" id="email" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
           </div>
          
           <div className='space grid gap-2'>
             <label htmlFor="subject">Subject</label>
-            <input type="text" id="subject" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
+            <input required type="text" id="subject" placeholder='' className='rounded-2xl px-3 py-2 bg-transparent border border-card focus:outline-primary' onChange={handleChange} />
           </div>
 
           <textarea id="message" className='w-full min-h-44 resize-x-none rounded-2xl px-3 py-1 bg-transparent border border-card focus:outline-primary' onChange={handleChange}></textarea>
