@@ -9,7 +9,7 @@ const Shop = () => {
     async function getProducts() {
       const controller = new AbortController();
       const { signal } = controller;
-    
+
       try {
         let response = await fetch(shopUrl, { signal });
         let data = await response.json();
@@ -19,12 +19,12 @@ const Shop = () => {
           console.error("Fetch error:", error);
         }
       }
-    
+
       return () => {
         controller.abort();
       };
     }
-    
+
     getProducts();
   }, []);
 
@@ -39,7 +39,8 @@ const Shop = () => {
           {products &&
             products.map(product => (
               <Link key={product.id} to={`product/${product.id}`}>
-                <div className='grid gap-5 w-full bg-gray-300 p-3 rounded-3xl'>
+                <div className='head' data-category={product.category}></div>
+                <div className='grid gap-5 w-full bg-gray-300 p-3 rounded-e-3xl'>
                   {/* product image */}
                   <div className='relative w-full h-96 z-0 border-b border-bg'>
                     <img
@@ -53,9 +54,6 @@ const Shop = () => {
                         transition: "opacity 0.5s ease-in-out",
                       }}
                     />
-                    <span className='absolute rotate-12 text-bg font-bold w-fit py-1 px-2 bg-card rounded-full -right-2 top-0'>
-                      {product.category}
-                    </span>
                   </div>
 
                   {/* product details */}
