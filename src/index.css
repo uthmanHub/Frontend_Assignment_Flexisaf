@@ -31,6 +31,11 @@ li > .active {
   border-radius: 5px;
 }
 
+li:hover {
+  border-radius: 5px;
+  color: #fdcb5b;
+}
+
 .backgroundImg {
   background-image: url("./images/heroPic.jpg");
   background-size: cover;
