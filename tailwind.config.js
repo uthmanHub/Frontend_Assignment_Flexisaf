@@ -8,8 +8,9 @@ export default {
         primary: "#3ebbd6",
         card: "#fdcb5b",
         link: "#065868",
+        danger: "#ef4444"
       },
-      // px-5 py-3 bg-card rounded-3xl
+
     },
   },
   plugins: [

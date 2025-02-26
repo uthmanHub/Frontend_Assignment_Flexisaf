@@ -669,3 +669,137 @@ document.querySelector(".send").addEventListener("submit", submitForm);
 
 ---
 
+
+
+# **Week 6 Learning Summary: Redux & Context API**  
+
+This week, I explored **state management** techniques in React, focusing on **Context API** as a built-in solution for managing global state in applications. While I also learned about Redux, my primary focus was on implementing **Context API** for handling global data, particularly for **managing a shopping cart** in an e-commerce-like application.  
+
+---
+
+## **📌 Topics Covered:**  
+- **Redux** → A popular state management library for large-scale applications.  
+- **Context API** → A built-in React feature for managing global state without prop drilling.  
+- **useContext Hook** → Consuming context within functional components.  
+- **Creating a Cart Context Provider** → Managing cart items globally.  
+
+---
+
+## **🔹 Managing a Shopping Cart with Context API**  
+The **Context API** allows React applications to efficiently share **cart data** between components without passing props manually at every level.  
+
+### **🛠 Creating a Cart Context in React**  
+```javascript
+import { createContext, useState } from "react";
+
+// Create a Context for the Cart
+export const CartContext = createContext();
+
+export function CartProvider({ children }) {
+  const [cart, setCart] = useState([]);
+
+  // Add item to cart
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+
+  // Remove item from cart
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
+
+  // Clear cart
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
+```
+
+---
+
+### **🛠 Using Cart Context in a Component**  
+```javascript
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
+function Cart() {
+  const { cart, removeFromCart, clearCart } = useContext(CartContext);
+
+  return (
+    <div>
+      <h2>Shopping Cart</h2>
+      {cart.length === 0 ? <p>Cart is empty</p> : null}
+
+      {cart.map((item) => (
+        <div key={item.id} className="flex justify-between">
+          <p>{item.name} - ${item.price}</p>
+          <button onClick={() => removeFromCart(item.id)}>Remove</button>
+        </div>
+      ))}
+
+      {cart.length > 0 && <button onClick={clearCart}>Clear Cart</button>}
+    </div>
+  );
+}
+
+export default Cart;
+```
+
+---
+
+### **🛠 Adding Items to the Cart from a Product List**  
+```javascript
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
+function Product({ product }) {
+  const { addToCart } = useContext(CartContext);
+
+  return (
+    <div className="border p-4">
+      <h3>{product.name}</h3>
+      <p>${product.price}</p>
+      <button onClick={() => addToCart(product)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default Product;
+```
+
+---
+
+### **🛠 Wrapping the App with Cart Context Provider**  
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { CartProvider } from "./context/CartContext";
+
+ReactDOM.render(
+  <CartProvider>
+    <App />
+  </CartProvider>,
+  document.getElementById("root")
+);
+```
+
+---
+
+## **📌 Key Takeaways**  
+✅ **Redux** is a powerful state management tool, but it can be overkill for simple apps.  
+✅ **Context API** is an effective way to manage state without installing extra libraries.  
+✅ **useContext Hook** makes consuming shared state easy across components.  
+✅ **Cart Context** helps manage cart operations like adding, removing, and clearing items.  
+
+---
+
+### **🚀 Lesson Outcome:**  
+With this week's lessons, I successfully **implemented Context API** in my React project to **manage a shopping cart**. This allowed me to handle cart operations globally, improving the scalability of the application.  
+
