@@ -8,6 +8,7 @@ import Header from "./pages/Header";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
         <Route path='/blog' element={<Blog />} />
         <Route path='/blog/:id' element={<BlogPage />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/shop' element={<Shop />} />
-        <Route path='/shop/product/:id' element={<ProductPage /> } />
+        <Route path='/shop/product/:id' element={<ProductPage />} />
       </Routes>
       <Footer />
     </>

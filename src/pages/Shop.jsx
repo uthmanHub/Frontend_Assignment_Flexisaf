@@ -6,6 +6,7 @@ const Shop = () => {
   const shopUrl = import.meta.env.VITE_SHOP_URL;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function getProducts() {
       const controller = new AbortController();
       const { signal } = controller;

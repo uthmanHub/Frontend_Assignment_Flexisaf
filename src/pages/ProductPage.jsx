@@ -1,26 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { useCart } from "../provider/Context";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [_, setCart] = useCart();
   const shopUrl = import.meta.env.VITE_PRODUCT_URL;
 
   useEffect(() => {
-    fetch(shopUrl + id)
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        console.log(data);
-        setProduct(data);
-      });
+      window.scrollTo(0, 0);
+      async function getProduct() {
+        const controller = new AbortController();
+        const { signal } = controller;
+  
+        try {
+          let response = await fetch(shopUrl + id, { signal });
+          let data = await response.json();
+          setProduct(data);
+        } catch (error) {
+          if (error.name !== "AbortError") {
+            console.error("Fetch error:", error);
+          }
+        }
+  
+        return () => {
+          controller.abort();
+        };
+      }
+  
+      getProduct();
+    }, []);
 
-    //   return () => {
-    //     second
-    //   }
-  }, []);
+  function addToCart(product) {
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item.id === product.id);
+
+      if (existingItem) {
+        // If item exists, increase quantity
+        return prevCart.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        // If item doesn't exist, add it with quantity 1
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  }
 
   return (
     <div className='px-3 md:px-6 lg:px-10 mb-64 md:mb-5'>
@@ -51,7 +81,9 @@ const ProductPage = () => {
 
             {/* content rhs */}
             <div className='flex flex-col  gap-1 border-2 rounded p-3 md:p-10 w-full'>
-              <h1 className='p-2 font-bold border-b border-bg'>{product.title}</h1>
+              <h1 className='p-2 font-bold border-b border-bg'>
+                {product.title}
+              </h1>
               <p className='p-2 font-extrabold'>${product.price}</p>
               <span
                 className={`${
@@ -67,7 +99,10 @@ const ProductPage = () => {
               </span>
               <p className='mt-3'>{product.description}</p>
 
-              <button className='justify-end mt-5 w-full py-3 font-bold text-white rounded-lg bg-bg hover:bg-card hover:text-bg'>
+              <button
+                onClick={() => addToCart(product)}
+                className='justify-end mt-5 w-full py-3 font-bold text-white rounded-lg bg-bg hover:bg-card hover:text-bg'
+              >
                 Add to Cart
               </button>
             </div>
@@ -85,8 +120,11 @@ const ProductPage = () => {
                       className='flex flex-col rounded-lg bg-gray-500 w-full justify-between items-center py-3 p-2 border-b border-bg'
                     >
                       <span>
-                        {Array.from({ length: review.rating }, () => (
-                          <i className='fa fa-star fa-md text-yellow-500'></i>
+                        {Array.from({ length: review.rating }, (_, i) => (
+                          <i
+                            key={i}
+                            className='fa fa-star fa-md text-yellow-500'
+                          ></i>
                         ))}
                       </span>
                       <q>{review.comment}</q>
