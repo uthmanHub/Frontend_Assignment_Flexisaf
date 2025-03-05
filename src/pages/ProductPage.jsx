@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { ToastContainer, toast } from 'react-toastify';
 import { useCart } from "../provider/Context";
-import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const [product, setProduct] = useState([]);
@@ -9,6 +9,7 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const [_, setCart] = useCart();
   const shopUrl = import.meta.env.VITE_PRODUCT_URL;
+  const notify = () => toast("😍 Item added Successfully 🧺");
 
   useEffect(() => {
       window.scrollTo(0, 0);
@@ -35,6 +36,7 @@ const ProductPage = () => {
     }, []);
 
   function addToCart(product) {
+    notify()
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === product.id);
 
@@ -50,10 +52,15 @@ const ProductPage = () => {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
+    
+    setTimeout(() => {
+      navigate("/shop");
+    }, 3000);
   }
 
   return (
     <div className='px-3 md:px-6 lg:px-10 mb-64 md:mb-5'>
+      <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} theme="dark" />
       <i
         className='fa fa-arrow-left fa-lg mt-5 cursor-pointer p-2 rounded text-bg hover:bg-card'
         onClick={() => navigate(-1)}
@@ -117,7 +124,7 @@ const ProductPage = () => {
                   product.reviews.map((review, index) => (
                     <div
                       key={index}
-                      className='flex flex-col rounded-lg bg-gray-500 w-full justify-between items-center py-3 p-2 border-b border-bg'
+                      className='flex flex-col rounded-lg  [#8bcde7] bg-gray-200 shadow-xl w-full justify-between items-center py-3 p-2 border-b border-bg'
                     >
                       <span>
                         {Array.from({ length: review.rating }, (_, i) => (
