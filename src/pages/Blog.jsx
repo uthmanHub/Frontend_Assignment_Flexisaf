@@ -98,6 +98,7 @@ const Blog = () => {
   const newsUrl = import.meta.env.VITE_NEWS_URL;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function getNews() {
       const controller = new AbortController();
       const { signal } = controller;

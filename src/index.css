@@ -78,12 +78,11 @@ li:hover {
 }
 
 .head {
-  background-color: #26343e;
-  background-color: #d1d5db;
+  background-color: #e5e7eb;
   color: #000;
   font-weight: bold;
   text-transform: capitalize;
-  width: min(230px, 100%);
+  width: min(190px, 100%);
   height: 50px;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
@@ -97,8 +96,7 @@ li:hover {
   width: 10%;
   height: 30px;
   border-bottom-left-radius: 30px;
-  box-shadow: -11px 3px 0px #125cca;
-  box-shadow: -11px 3px 0px #d1d5db;
+  box-shadow: -11px 3px 0px #e5e7eb;
   content: "";
   background-color: transparent;
 }
@@ -108,7 +106,7 @@ li:hover {
   position: absolute;
   top: 0px;
   left: 105%;
-  width: 70%;
+  width: 50%;
   height: 40px;
   border-radius: 30px;
   padding: 5px 10px;
@@ -120,12 +118,12 @@ li:hover {
 
 @media (max-width: 768px) {
   .head {
-    width: 10%;
+    width: 10px;
   }
 }
 @media (max-width: 1024px) {
   .head {
-    width: 180px;
+    width: 200px;
   }
 
   .head::after {
